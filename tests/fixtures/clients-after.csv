@@ -1,0 +1,4 @@
+ClientID,Name,Email,FollowUpDate,Status
+C003,Sample Client Three,client3@example.invalid,2026-09-20,Draft prepared
+C002,Sample Client Two,client2@example.invalid,2026-09-21,New
+C001,Sample Client One,client1@example.invalid,2026-09-20,Draft prepared

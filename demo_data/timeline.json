@@ -1,0 +1,908 @@
+{
+ "_note": "SAMPLE DATA. Invented companies, fake TRNs / trade licence numbers and made-up .example emails. Each step is one save of the sheet; the loader replays these saves through the real sheet diff. Day 0 = 28 days before the load.",
+ "id_columns": {
+  "sample_vendor_followups.csv": "Vendor Code",
+  "sample_payroll_collation.csv": "Emp ID",
+  "sample_invoice_status.csv": "Client Code"
+ },
+ "runs": [
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1042",
+   "day": 0,
+   "time": "10:05",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "ANT/2026/131",
+      "Invoice Date": "04/09/2026",
+      "Amount (AED)": "AED 51,200.00",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 6,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "2026-09-05"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1057",
+   "day": 0,
+   "time": "11:20",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "DLL-7788",
+      "Invoice Date": "2026-09-03",
+      "Amount (AED)": "98,500",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 7,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "05/09/2026"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1063",
+   "day": 1,
+   "time": "15:40",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "SIT/26/0467",
+      "Invoice Date": "5 Sep 2026",
+      "Amount (AED)": "AED 36,000.50",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 2,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 5,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "2026-09-06"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1042",
+   "day": 7,
+   "time": "10:12",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "ANT/2026/144",
+      "Invoice Date": "11/09/2026",
+      "Amount (AED)": "AED 46,900.00",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 5,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "12/09/2026"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1057",
+   "day": 7,
+   "time": "11:31",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "DLL-7851",
+      "Invoice Date": "10-09-26",
+      "Amount (AED)": "104,250",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 8,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "2026-09-12"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1063",
+   "day": 8,
+   "time": "15:10",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "SIT/26/0489",
+      "Invoice Date": "2026-09-12",
+      "Amount (AED)": "AED 38,400",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 6,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "13 Sep 2026"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1042",
+   "day": 14,
+   "time": "09:58",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "ANT/2026/159",
+      "Invoice Date": "18 Sep 2026",
+      "Amount (AED)": "AED 53,050.00",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 2,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 6,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "2026-09-19"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1057",
+   "day": 14,
+   "time": "12:02",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "DLL-7902",
+      "Invoice Date": "17/09/2026",
+      "Amount (AED)": "AED 99,990",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 6,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "19/09/2026"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1063",
+   "day": 15,
+   "time": "16:05",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "SIT/26/0510",
+      "Invoice Date": "19-09-26",
+      "Amount (AED)": "37,250",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 7,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "2026-09-20"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1042",
+   "day": 21,
+   "time": "10:20",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "ANT/2026/172",
+      "Invoice Date": "2026-09-25",
+      "Amount (AED)": "AED 49,400.00",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 6,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "26/09/2026"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1057",
+   "day": 21,
+   "time": "11:45",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "DLL-7960",
+      "Invoice Date": "24 Sep 2026",
+      "Amount (AED)": "101,700",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 2,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 5,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "2026-09-26"
+     }
+    }
+   ]
+  },
+  {
+   "label": "vendor payment cycle",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1063",
+   "day": 22,
+   "time": "15:25",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice No": "SIT/26/0533",
+      "Invoice Date": "26/09/2026",
+      "Amount (AED)": "AED 39,100",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "TRN Check": "Verified"
+     }
+    },
+    {
+     "after_min": 6,
+     "set": {
+      "Follow-up Status": "Payment requested",
+      "Payment Requested On": "27 Sep 2026"
+     }
+    }
+   ]
+  },
+  {
+   "label": "near-miss: one vendor only (credit note)",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1071",
+   "day": 2,
+   "time": "14:00",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Remarks": "short supply - 2 guards absent"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "Amount (AED)": "61,000"
+     }
+    }
+   ]
+  },
+  {
+   "label": "near-miss: one vendor only (credit note)",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1071",
+   "day": 9,
+   "time": "14:10",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Remarks": "night shift gap - credit note asked"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Amount (AED)": "AED 59,500"
+     }
+    }
+   ]
+  },
+  {
+   "label": "near-miss: one vendor only (credit note)",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1071",
+   "day": 16,
+   "time": "13:55",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Remarks": "1 guard absent 3 days"
+     }
+    },
+    {
+     "after_min": 5,
+     "set": {
+      "Amount (AED)": "62,250"
+     }
+    }
+   ]
+  },
+  {
+   "label": "near-miss: one vendor only (credit note)",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1071",
+   "day": 23,
+   "time": "14:20",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Remarks": "full month - no deduction"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "Amount (AED)": "AED 64,000"
+     }
+    }
+   ]
+  },
+  {
+   "label": "weekly wage collation",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-003",
+   "day": 1,
+   "time": "17:30",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Week Ending": "06/09/2026",
+      "Days Present": "6",
+      "OT Hours": "4",
+      "Status": "Collating"
+     }
+    },
+    {
+     "after_min": 2,
+     "set": {
+      "Net Pay (AED)": "AED 1,605"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Status": "Ready for payroll"
+     }
+    }
+   ]
+  },
+  {
+   "label": "weekly wage collation",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-011",
+   "day": 1,
+   "time": "17:45",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Week Ending": "2026-09-06",
+      "Days Present": "5",
+      "OT Hours": "2",
+      "Status": "Collating"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Net Pay (AED)": "1,402"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "Status": "Ready for payroll"
+     }
+    }
+   ]
+  },
+  {
+   "label": "weekly wage collation",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-003",
+   "day": 8,
+   "time": "17:20",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Week Ending": "13 Sep 2026",
+      "Days Present": "5",
+      "OT Hours": "7",
+      "Status": "Collating"
+     }
+    },
+    {
+     "after_min": 2,
+     "set": {
+      "Net Pay (AED)": "AED 1,501"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "Status": "Ready for payroll"
+     }
+    }
+   ]
+  },
+  {
+   "label": "weekly wage collation",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-011",
+   "day": 8,
+   "time": "17:40",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Week Ending": "13/09/2026",
+      "Days Present": "6",
+      "OT Hours": "5",
+      "Status": "Collating"
+     }
+    },
+    {
+     "after_min": 2,
+     "set": {
+      "Net Pay (AED)": "AED 1,754"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Status": "Ready for payroll"
+     }
+    }
+   ]
+  },
+  {
+   "label": "weekly wage collation",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-003",
+   "day": 15,
+   "time": "17:35",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Week Ending": "2026-09-20",
+      "Days Present": "6",
+      "OT Hours": "3",
+      "Status": "Collating"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Net Pay (AED)": "1,571"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "Status": "Ready for payroll"
+     }
+    }
+   ]
+  },
+  {
+   "label": "weekly wage collation",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-011",
+   "day": 15,
+   "time": "17:50",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Week Ending": "20-09-26",
+      "Days Present": "5",
+      "OT Hours": "1",
+      "Status": "Collating"
+     }
+    },
+    {
+     "after_min": 2,
+     "set": {
+      "Net Pay (AED)": "AED 1,332"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Status": "Ready for payroll"
+     }
+    }
+   ]
+  },
+  {
+   "label": "weekly wage collation",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-003",
+   "day": 22,
+   "time": "17:25",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Week Ending": "27/09/2026",
+      "Days Present": "5",
+      "OT Hours": "8",
+      "Status": "Collating"
+     }
+    },
+    {
+     "after_min": 2,
+     "set": {
+      "Net Pay (AED)": "AED 1,672"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Status": "Ready for payroll"
+     }
+    }
+   ]
+  },
+  {
+   "label": "weekly wage collation",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-011",
+   "day": 22,
+   "time": "17:45",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Week Ending": "27 Sep 2026",
+      "Days Present": "6",
+      "OT Hours": "6",
+      "Status": "Collating"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Net Pay (AED)": "1,811"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "Status": "Ready for payroll"
+     }
+    }
+   ]
+  },
+  {
+   "label": "near-miss: two clients, two reminders each",
+   "file": "sample_invoice_status.csv",
+   "id": "CL-204",
+   "day": 3,
+   "time": "12:00",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Last Reminder On": "2026-09-04",
+      "Reminder Count": "1"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "Notes": "called - promised by Friday"
+     }
+    }
+   ]
+  },
+  {
+   "label": "near-miss: two clients, two reminders each",
+   "file": "sample_invoice_status.csv",
+   "id": "CL-219",
+   "day": 4,
+   "time": "12:30",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Last Reminder On": "05/09/2026",
+      "Reminder Count": "1"
+     }
+    },
+    {
+     "after_min": 3,
+     "set": {
+      "Notes": "owner travelling"
+     }
+    }
+   ]
+  },
+  {
+   "label": "near-miss: two clients, two reminders each",
+   "file": "sample_invoice_status.csv",
+   "id": "CL-204",
+   "day": 11,
+   "time": "12:15",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Last Reminder On": "11 Sep 2026",
+      "Reminder Count": "2"
+     }
+    },
+    {
+     "after_min": 5,
+     "set": {
+      "Notes": "second reminder - cheque next week"
+     }
+    }
+   ]
+  },
+  {
+   "label": "near-miss: two clients, two reminders each",
+   "file": "sample_invoice_status.csv",
+   "id": "CL-219",
+   "day": 12,
+   "time": "12:40",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Last Reminder On": "2026-09-12",
+      "Reminder Count": "2"
+     }
+    },
+    {
+     "after_min": 4,
+     "set": {
+      "Notes": "asked for revised invoice"
+     }
+    }
+   ]
+  },
+  {
+   "label": "noise: one-off email fix",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1049",
+   "day": 3,
+   "time": "09:40",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Contact Email": "accounts@falcon-electricals.example"
+     }
+    }
+   ]
+  },
+  {
+   "label": "noise: TRN received",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1045",
+   "day": 5,
+   "time": "16:10",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "TRN": "100430345661975",
+      "TRN Check": "Verified",
+      "Remarks": ""
+     }
+    }
+   ]
+  },
+  {
+   "label": "noise: date re-typed in another format (no real change)",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1050",
+   "day": 6,
+   "time": "11:00",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Invoice Date": "5 Sep 2026",
+      "Amount (AED)": "AED 15,400.00"
+     }
+    }
+   ]
+  },
+  {
+   "label": "noise: bank digits added",
+   "file": "sample_payroll_collation.csv",
+   "id": "EMP-007",
+   "day": 4,
+   "time": "18:05",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "IBAN (last 4)": "6034"
+     }
+    }
+   ]
+  },
+  {
+   "label": "noise: part payment cleared",
+   "file": "sample_invoice_status.csv",
+   "id": "CL-208",
+   "day": 10,
+   "time": "15:30",
+   "steps": [
+    {
+     "after_min": 0,
+     "set": {
+      "Status": "Paid",
+      "Notes": "balance received by bank transfer"
+     }
+    }
+   ]
+  },
+  {
+   "label": "noise: new vendor onboarded",
+   "file": "sample_vendor_followups.csv",
+   "id": "VND-1088",
+   "day": 12,
+   "time": "10:45",
+   "steps": [
+    {
+     "after_min": 0,
+     "add": {
+      "Vendor Name": "Jebel Paper Supplies",
+      "TRN": "100597854243572",
+      "Trade Licence No": "CN-5437365",
+      "Contact Email": "sales@jebelpaper.example",
+      "Invoice No": "JPS-1002",
+      "Invoice Date": "13/09/2026",
+      "Amount (AED)": "27,300",
+      "TRN Check": "Pending",
+      "Follow-up Status": "Invoice received"
+     }
+    }
+   ]
+  }
+ ]
+}

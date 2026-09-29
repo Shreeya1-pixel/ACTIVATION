@@ -1,0 +1,9 @@
+<script type="text/javascript">
+  RED.nodes.registerType('as-draft-create', {
+    category: 'autostack', color: '#2563EB',
+    defaults: { name: { value: '' }, workerUrl: { value: 'http://127.0.0.1:8747' }, workerToken: { value: '' },
+                templateId: { value: 'followup_en' } },
+    inputs: 1, outputs: 1, icon: 'file.svg',
+    label() { return this.name || 'create draft'; },
+  });
+</script>

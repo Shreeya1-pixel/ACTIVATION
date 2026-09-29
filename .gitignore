@@ -1,0 +1,89 @@
+# ── Python ──────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.venv/
+venv/
+env/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg-info/
+dist/
+build/
+*.egg
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# ── Node / Frontend ──────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+desktop/node_modules/
+tests/node_modules/
+frontend/dist/
+frontend/.vite/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Environment & Secrets ────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+
+# ── Runtime artifacts (DB, token, logs) ─────────────────────────────────
+artifacts/spike/spike.db
+artifacts/spike/spike.db-shm
+artifacts/spike/spike.db-wal
+artifacts/spike/token
+artifacts/spike/red-userdir/
+artifacts/spike/*.log
+artifacts/spike/logs/
+
+# Runtime-generated resource files (QA runs, fixture resets, scratch)
+artifacts/spike/resources/spike-scratch/
+artifacts/spike/resources/invoice-register/
+artifacts/spike/resources/sample-tracking-file/*.bak
+artifacts/spike/resources/sample-tracking-file/conc-*.csv
+artifacts/spike/resources/sample-tracking-file/dryrun-*.csv
+artifacts/spike/resources/sample-tracking-file/gate-*.csv
+artifacts/spike/resources/sample-tracking-file/hard-*.csv
+artifacts/spike/resources/sample-tracking-file/params-*.csv
+artifacts/spike/resources/sample-tracking-file/mx-*.csv
+artifacts/spike/resources/sample-tracking-file/rb*.csv
+artifacts/spike/watched/
+
+# Keep skeleton dirs and the canonical sample fixture
+!artifacts/spike/.gitkeep
+!artifacts/.gitkeep
+!artifacts/spike/resources/sample-tracking-file/clients.csv
+
+# ── OS ───────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# ── IDE ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.iml
+.cursor/
+
+# ── Misc ─────────────────────────────────────────────────────────────────
+*.local
+*.log
+
+.vercel
+.env*

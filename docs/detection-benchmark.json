@@ -1,0 +1,50 @@
+{
+  "clean": {
+    "workspaces": 500,
+    "seed": 7,
+    "slow_step_rate": 0.0,
+    "events": 55563,
+    "planted_patterns": 982,
+    "near_misses": 983,
+    "true_positives": 982,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "near_miss_false_alarms": 0,
+    "ms_per_1000_events": 3.3
+  },
+  "slow_users_5pct": {
+    "workspaces": 500,
+    "seed": 7,
+    "slow_step_rate": 0.05,
+    "events": 55020,
+    "planted_patterns": 980,
+    "near_misses": 1000,
+    "true_positives": 980,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "near_miss_false_alarms": 0,
+    "ms_per_1000_events": 4.08
+  },
+  "slow_users_15pct": {
+    "workspaces": 500,
+    "seed": 7,
+    "slow_step_rate": 0.15,
+    "events": 55905,
+    "planted_patterns": 988,
+    "near_misses": 1015,
+    "true_positives": 987,
+    "false_positives": 30,
+    "false_negatives": 1,
+    "precision": 0.9705,
+    "recall": 0.999,
+    "f1": 0.9845,
+    "near_miss_false_alarms": 30,
+    "ms_per_1000_events": 4.37
+  }
+}

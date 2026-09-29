@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:autostack:phase2:event:2",
+  "title": "Real capture event v2 (attributable observation; no authority or raw field values)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_version",
+    "event_id",
+    "captured_at",
+    "processed_at",
+    "source",
+    "action",
+    "resource",
+    "record_key",
+    "changed_fields",
+    "outcome",
+    "synthetic"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "source_version": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "enum": [
+        "saved_file_comparison",
+        "sample_browser",
+        "sample_draft_editor",
+        "watcher",
+        "sample_replay",
+        "practice_workspace"
+      ]
+    },
+    "action": {
+      "enum": [
+        "record_opened",
+        "spreadsheet_row_updated",
+        "row.added",
+        "row.updated",
+        "row.removed",
+        "draft_saved",
+        "task.completed"
+      ]
+    },
+    "resource": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "record_key": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "changed_fields": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 32,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 64
+      }
+    },
+    "outcome": {
+      "enum": [
+        "success",
+        "ambiguous",
+        "error"
+      ]
+    },
+    "synthetic": {
+      "const": false
+    }
+  }
+}

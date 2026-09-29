@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "AutoStack Phase 1 — synthetic fixture only",
+  "version": "0.1.0",
+  "description": "Records two actions on the local synthetic fixture. No real office monitoring.",
+  "permissions": ["storage"],
+  "background": {"service_worker": "worker.js"},
+  "content_scripts": [{
+    "matches": ["http://127.0.0.1/office.html"],
+    "js": ["capture.js"],
+    "run_at": "document_idle",
+    "all_frames": false
+  }],
+  "action": {"default_popup": "events.html"}
+}

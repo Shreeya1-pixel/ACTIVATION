@@ -1,0 +1,22 @@
+Vendor Code,Vendor Name,TRN,Trade Licence No,Contact Email,Invoice No,Invoice Date,Amount (AED),TRN Check,Follow-up Status,Payment Requested On,Remarks
+VND-1042,Al Noor General Trading LLC,100229832027586,CN-8003243,accounts@alnoor-trading.example,ANT/2026/118,28/08/2026,"AED 48,500.00",Verified,Payment requested,2026-08-29,
+VND-1043,Nimbus Packaging FZE,100702732289076,CN-8348672,billing@nimbuspack.example,NP-5521,2026-08-30,12600,Verified,Paid,01/09/2026,
+VND-1045,Corniche Office Supplies,,CN-8877080,corniche.supplies@mailbox.example,COS-88,1 Sep 2026,"3,250",Pending,Invoice received,,TRN awaited from vendor
+VND-1049,Falcon Electricals LLC,100366254636456,CN-1017170,falcon.elec@mailbox.example,FE/0913,02-09-26,"AED 9,870",Verified,Paid,2026-09-03,
+VND-1050,Marina Print House,100864016935857,CN-9236886,orders@marinaprint.example,MPH-2231,05/09/2026,15400,Verified,Paid,06/09/2026,
+VND-1057,Dune Line Logistics,100478080671544,CN-6317301,finance@duneline-log.example,DLL-7710,2026-08-27,"AED 112,000.00",Verified,Payment requested,2026-08-28,
+,Walk-in cash purchase,,,,CASH-19,03/09/2026,640,,Paid,,no vendor code - petty cash
+VND-1061,Greenleaf Facility Services,100513034045401,CN-2307315,greenleaf.fs@mailbox.example,GFS-301,4 Sep 2026,"22,000",Verified,Paid,2026-09-05,
+VND-1063,Skyline IT Services,100518832198302,CN-9542494,ar@skyline-it.example,SIT/26/0442,29/08/2026,"AED 36,000.00",Verified,Payment requested,30/08/2026,
+VND-1064,Saffron Kitchen Catering,100800213290042,CN-3435207,saffron.catering@mailbox.example,SKC-77,2026-09-06,5800,Pending,Invoice received,,
+VND-1066,Creek Stationers,100721176099220,CN-2468710,creek.stat@mailbox.example,CS-1409,06-09-26,"2,145.50",Verified,Paid,07/09/2026,
+,,,,,,,,,,,
+VND-1068,Hatta Transport LLC,100956407405782,CN-9076396,hatta.transport@mailbox.example,HT-560,7 Sep 2026,"AED 18,750",Verified,Paid,2026-09-08,
+VND-1071,Pinnacle Security Services,100403706434934,CN-5623680,billing@pinnacle-sec.example,PSS-2026-081,2026-08-31,"64,000",Verified,Invoice received,,
+VND-1073,Lotus Water Solutions,100420349503099,CN-1371302,lotus.water@mailbox.example,LWS-19,08/09/2026,1200,Verified,Paid,09/09/2026,
+VND-1074,Redline Fire Safety,100139414870525,CN-1223733,redlinefire@mailbox.example,RFS/412,2026-09-08,"AED 7,300.00",Pending,Invoice received,,
+VND-1076,Coastal Courier Co,100910105426234,CN-1094413,ops@coastalcourier.example,CCC-9921,9 Sep 2026,980,Verified,Paid,2026-09-10,
+VND-1078,Palm Furniture Mart,100104078582864,CN-2238878,palm.furniture@mailbox.example,PFM-66,10/09/2026,"41,500",Verified,Paid,11/09/2026,
+VND-1080,Oasis Pest Control,,CN-1063075,oasis.pest@mailbox.example,OPC-230,2026-09-10,3500,Pending,Invoice received,,TRN not on invoice
+VND-1082,Sunpeak Solar Maintenance,100997836427761,CN-1102942,service@sunpeaksolar.example,SSM-18,11-09-26,"AED 11,800",Verified,Paid,2026-09-12,
+VND-1085,Souk Hardware,100108239873942,CN-3000782,souk.hw@mailbox.example,SH/0788,12 Sep 2026,2760,Verified,Paid,13/09/2026,

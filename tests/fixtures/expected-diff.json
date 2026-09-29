@@ -1,0 +1,8 @@
+{
+  "added": [],
+  "removed": [],
+  "updated": [
+    {"record_key": "sample:C001", "changed_fields": ["Status"]},
+    {"record_key": "sample:C003", "changed_fields": ["Status"]}
+  ]
+}

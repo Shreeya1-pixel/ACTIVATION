@@ -1,0 +1,6 @@
+{
+  "name": "autostack-tests",
+  "private": true,
+  "scripts": {"test": "node browser/capture-and-ui.cjs"},
+  "devDependencies": {"playwright": "1.62.1"}
+}

@@ -1,0 +1,19 @@
+Emp ID,Employee Name,Department,Contract Type,Week Ending,Days Present,OT Hours,Leave (days),Net Pay (AED),Status,IBAN (last 4)
+EMP-001,Layla Hassan,Accounts,Permanent,,,,,,Monthly payroll,4417
+EMP-003,Joseph Mensah,Warehouse,Contract (weekly),30/08/2026,5,6,1,"AED 1,535",Ready for payroll,9023
+EMP-004,Farah Al Suwaidi,Front office,Permanent,,,,,,Monthly payroll,1180
+EMP-006,Rajan Pillai,Warehouse,Contract (weekly),2026-08-30,6,0,0,"1,575",Paid,5562
+EMP-007,Maria Santos,Housekeeping,Contract (weekly),30 Aug 2026,6,2,,"AED 1,470",Paid,
+EMP-009,Imran Qureshi,Delivery,Contract (weekly),30-08-26,4,0,2,"1,050",Paid,7741
+EMP-011,Grace Wanjiru,Warehouse,Contract (weekly),2026-08-30,6,4,0,"AED 1,715",Ready for payroll,3308
+EMP-012,Karim Mansour,Accounts,Permanent,,,,,,Monthly payroll,2295
+EMP-014,Ana Reyes,Delivery,Contract (weekly),30/08/2026,5,3,1,"1,356",Paid,6610
+EMP-015,Bilal Ahmed,Security,Contract (weekly),30/08/2026,7,8,0,"AED 2,030",Paid,4086
+,,,,,,,,,,
+EMP-017,Noura Al Hammadi,Front office,Permanent,,,,,,Monthly payroll,9954
+EMP-018,Suresh Thapa,Warehouse,Contract (weekly),2026-08-30,6,1,0,"1,601",Paid,
+EMP-020,Joy Okafor,Housekeeping,Contract (weekly),30 Aug 2026,5,0,1,"1,225",Paid,3372
+EMP-021,Arif Khan,Delivery,Contract (weekly),30-08-26,6,5,0,"AED 1,738",Paid,8819
+EMP-023,Elena Petrova,Accounts,Permanent,,,,,,Monthly payroll,5501
+EMP-024,Tariq Mahmood,Security,Contract (weekly),30/08/2026,7,6,0,"1,965",Paid,2740
+EMP-026,Rosa Dela Cruz,Housekeeping,Contract (weekly),2026-08-30,4,0,2,980,Paid,6128

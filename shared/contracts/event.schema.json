@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:autostack:phase1:event:1",
+  "title": "Synthetic capture event v1 (no authority or raw field values)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_version", "event_id", "captured_at", "processed_at", "source", "action", "resource", "record_key", "changed_fields", "outcome", "synthetic"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "source_version": {"const": "phase1-0.1.0"},
+    "event_id": {"type": "string", "format": "uuid"},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "processed_at": {"type": "string", "format": "date-time"},
+    "source": {"enum": ["sample_browser", "saved_file_comparison", "sample_draft_editor"]},
+    "action": {"enum": ["record_opened", "spreadsheet_row_updated", "draft_saved"]},
+    "resource": {"enum": ["sample-client-page", "sample-tracking-file", "sample-draft-store"]},
+    "record_key": {"type": "string", "pattern": "^sample:C[0-9]{3}$"},
+    "changed_fields": {"type": "array", "uniqueItems": true, "maxItems": 5, "items": {"enum": ["ClientID", "Name", "Email", "FollowUpDate", "Status"]}},
+    "outcome": {"enum": ["success", "ambiguous"]},
+    "synthetic": {"const": true}
+  },
+  "allOf": [
+    {"if": {"properties": {"action": {"const": "record_opened"}}}, "then": {"properties": {"source": {"const": "sample_browser"}, "resource": {"const": "sample-client-page"}, "changed_fields": {"maxItems": 0}}}},
+    {"if": {"properties": {"action": {"const": "draft_saved"}}}, "then": {"properties": {"source": {"const": "sample_draft_editor"}, "resource": {"const": "sample-draft-store"}, "changed_fields": {"maxItems": 0}}}},
+    {"if": {"properties": {"action": {"const": "spreadsheet_row_updated"}}}, "then": {"properties": {"source": {"const": "saved_file_comparison"}, "resource": {"const": "sample-tracking-file"}, "changed_fields": {"minItems": 1}}}}
+  ]
+}

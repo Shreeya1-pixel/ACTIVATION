@@ -1,0 +1,17 @@
+Client Code,Client Name,Invoice No,Invoice Date,Amount (AED),Due Date,Status,Last Reminder On,Reminder Count,Notes
+CL-201,Al Barsha Garments,INV-3301,01/08/2026,"AED 24,000",31/08/2026,Paid,,0,
+CL-204,Blue Lotus Cafe,INV-3307,2026-08-04,"8,450",2026-09-03,Overdue,,0,
+CL-206,Pearl Dental Clinic,INV-3312,6 Aug 2026,"AED 15,600.00",5 Sep 2026,Paid,,0,
+CL-208,Sunrise Tutorials,INV-3318,08-08-26,6200,07-09-26,Part paid,2026-09-05,1,"AED 3,000 received"
+CL-211,Arabesque Interiors,INV-3322,2026-08-10,"AED 52,300",2026-09-09,Paid,,0,
+CL-213,Green Basket Grocers,INV-3325,11/08/2026,"3,980",10/09/2026,Overdue,,0,
+,Unknown walk-in,INV-3327,12/08/2026,450,,Cancelled,,,duplicate invoice - void
+CL-215,Golden Sands Motors,INV-3330,2026-08-13,"AED 19,750",2026-09-12,Paid,,0,
+CL-217,Pixel Studio,INV-3334,15 Aug 2026,"11,200",14 Sep 2026,Paid,,0,
+CL-219,Mint Leaf Wellness Store,INV-3338,2026-08-16,"AED 7,640.00",2026-09-15,Overdue,,0,
+CL-220,Northstar Fitness,INV-3341,17/08/2026,9900,16/09/2026,Paid,,0,
+CL-222,Clearview Opticals,INV-3345,19-08-26,"AED 4,300",18-09-26,Not due,,0,
+CL-224,Metro Tiles Depot,INV-3349,2026-08-21,"38,000",2026-09-20,Not due,,0,
+CL-226,Jasmine Boutique,INV-3352,22 Aug 2026,"AED 6,780",21 Sep 2026,Not due,,0,
+CL-228,Swift Car Wash,INV-3356,2026-08-24,2350,2026-09-23,Not due,,0,
+CL-230,Harmony Music Classes,INV-3360,25/08/2026,"AED 5,500",24/09/2026,Not due,,0,

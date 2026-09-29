@@ -1,0 +1,15 @@
+{
+  "name": "autostack-in",
+  "private": true,
+  "scripts": {
+    "setup": "npm ci --ignore-scripts --prefix frontend && npm ci --ignore-scripts --prefix tests",
+    "dev": "npm --prefix frontend run dev --",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview --",
+    "test:unit": "python -m unittest discover -s tests/unit -v",
+    "test:browser": "node tests/browser/capture-and-ui.cjs"
+  },
+  "dependencies": {
+    "railway": "^3.11.0"
+  }
+}

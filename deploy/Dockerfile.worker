@@ -1,0 +1,31 @@
+# AutoStack worker (backend) container for Railway.
+# Build context: repo root.  `docker build -f deploy/Dockerfile.worker .`
+FROM python:3.13-slim
+
+WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/ backend/
+COPY shared/  shared/
+COPY scripts/ scripts/
+COPY demo_data/ demo_data/
+COPY tests/fixtures/ tests/fixtures/
+
+RUN useradd --create-home appuser \
+ && mkdir -p /data \
+ && chown -R appuser /data /app
+USER appuser
+
+# /data should be a Railway volume so the database, audit chain and signing key survive
+# redeploys. Railway mounts volumes as root: set RAILWAY_RUN_UID=0 on the service.
+ENV AUTOSTACK_DATA_DIR=/data AUTOSTACK_HOST=0.0.0.0
+EXPOSE 8747
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD python -c "import urllib.request, os; urllib.request.urlopen('http://127.0.0.1:' + os.environ.get('PORT','8747') + '/api/health', timeout=3)"
+
+# run_worker.py also starts the schedule / file-watch / webhook trigger loop.
+CMD ["python", "scripts/run_worker.py"]

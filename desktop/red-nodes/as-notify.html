@@ -1,0 +1,8 @@
+<script type="text/javascript">
+  RED.nodes.registerType('as-notify', {
+    category: 'autostack', color: '#2563EB',
+    defaults: { name: { value: '' }, workerUrl: { value: 'http://127.0.0.1:8747' }, workerToken: { value: '' } },
+    inputs: 1, outputs: 0, icon: 'file.svg',
+    label() { return this.name || 'notify + close run'; },
+  });
+</script>

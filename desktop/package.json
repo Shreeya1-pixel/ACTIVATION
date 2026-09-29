@@ -1,0 +1,17 @@
+{
+  "name": "autostack-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AutoStack IN desktop shell (Spike S1: Node-RED embed harness; Milestone A adds Electron)",
+  "main": "main.js",
+  "scripts": {
+    "spike:red": "node red-embed.js",
+    "desktop": "electron main.js"
+  },
+  "dependencies": {
+    "node-red": "4.1.1"
+  },
+  "devDependencies": {
+    "electron": "33.2.0"
+  }
+}

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>AutoStack synthetic office</title>
+<style>body{font:17px system-ui;max-width:760px;margin:48px auto;padding:24px;background:#f4f8fd;color:#182b49}section{background:white;padding:24px;border-radius:12px;margin:18px 0}button,input,select,textarea{font:inherit;margin:8px 0;padding:10px}label{display:block}textarea{width:90%;height:100px}button{background:#2366d7;color:white;border:0;border-radius:6px}pre{white-space:pre-wrap}</style>
+</head><body>
+<h1>Phase 1: sample client workflow</h1>
+<p><strong>Synthetic data only.</strong> The test extension records successful Open record and Save draft actions here. Nothing is sent to clients or a model.</p>
+<section><label>Client <select id="client"><option value="C001">C001 — Sample Client One</option><option value="C002">C002 — Sample Client Two</option><option value="C003">C003 — Sample Client Three</option></select></label>
+<button id="open" data-action="record_opened">Open record</button><pre id="record">No record opened.</pre></section>
+<section><label>Follow-up draft <textarea id="draft" placeholder="Enter an invented follow-up message"></textarea></label>
+<button id="save" data-action="draft_saved">Save draft locally</button><p>Drafts stay in this test browser’s local storage. No email API exists.</p></section>
+<section><label>Unobserved test input <input id="private-input" type="password" autocomplete="off"></label>
+<p>This field is for a negative capture test. Use invented text only.</p></section>
+<p id="result" role="status">Ready.</p><button id="reset">Delete sample drafts</button>
+<script src="office.js"></script></body></html>
