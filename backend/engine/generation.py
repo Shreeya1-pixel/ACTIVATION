@@ -38,7 +38,7 @@ BANNED_PATTERNS: list[tuple[str, str]] = [
     (r"\bsys\.", "sys access"),
     (r"\bsubprocess", "subprocess"),
     (r"\bsocket\b", "socket"),
-    (r"\be__class__\b|\b__globals__\b|\b__builtins__\b|\b__subclasses__\b", "dunder escape"),
+    (r"__(?:class|globals|builtins|subclasses|mro|bases?|dict|code|closure|getattribute)__", "dunder escape"),
     (r"\bpip\b|\binstall\b.*\bpackage\b", "dependency installation"),
 ]
 MAX_CODE_CHARS = 20000
@@ -241,4 +241,23 @@ def static_check(code: str) -> list[str]:
     for pattern, label in BANNED_PATTERNS:
         if re.search(pattern, code):
             violations.append(f"forbidden construct: {label}")
-    return violations
+    for module in _imported_modules(code):
+        if module not in ALLOWED_MODULES:
+            violations.append(f"forbidden construct: import outside allowlist ({module})")
+    return sorted(set(violations), key=violations.index)
+
+
+def _imported_modules(code: str) -> list[str]:
+    """Top-level names of every module the code imports, found by parsing, not pattern matching."""
+    import ast
+    try:
+        tree = ast.parse(code)
+    except SyntaxError:
+        return []
+    found = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            found.extend(a.name.split(".")[0] for a in node.names)
+        elif isinstance(node, ast.ImportFrom):
+            found.append("." if node.level else (node.module or "").split(".")[0])
+    return found

@@ -1,0 +1,32 @@
+[
+  {
+    "attempt": "Untouched template (control)",
+    "status": 200,
+    "result": "imported as untrusted draft"
+  },
+  {
+    "attempt": "Added a hidden 'write to payroll' step",
+    "status": 409,
+    "result": "graph does not match its published artifact hash; declared permissions do not match what the graph actually does"
+  },
+  {
+    "attempt": "Edited the steps and recomputed the hash",
+    "status": 409,
+    "result": "signature does not verify"
+  },
+  {
+    "attempt": "Removed the declared permissions",
+    "status": 409,
+    "result": "declared permissions do not match what the graph actually does; signature does not verify"
+  },
+  {
+    "attempt": "Stripped the signature",
+    "status": 409,
+    "result": "template is unsigned (published before signing existed); republish it"
+  },
+  {
+    "attempt": "Re-signed with an untrusted key",
+    "status": 409,
+    "result": "signer is not in this office's trusted signer list"
+  }
+]

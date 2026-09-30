@@ -1,0 +1,488 @@
+{
+  "attacks": 30,
+  "blocked_full_pipeline": 29,
+  "blocked_by_static_first": 27,
+  "blocked_sandbox_alone": 27,
+  "detail": [
+    {
+      "category": "network",
+      "attack": "raw socket connect",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'socket' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "network",
+      "attack": "urllib request",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'urllib.request' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "network",
+      "attack": "http.client",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "ne 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'http.client' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "network",
+      "attack": "ssl module",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": ".py\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'ssl' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "file system",
+      "attack": "read /etc/passwd with open()",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "/harness.py\", line 36, in <module>\n    result = g['run'](rows, spec.get('ctx', {}))\n  File \"generated.py\", line 2, in run\nNameError: name 'open' is not defined\n"
+      }
+    },
+    {
+      "category": "file system",
+      "attack": "write a file with open()",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "/harness.py\", line 36, in <module>\n    result = g['run'](rows, spec.get('ctx', {}))\n  File \"generated.py\", line 2, in run\nNameError: name 'open' is not defined\n"
+      }
+    },
+    {
+      "category": "file system",
+      "attack": "pathlib write",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": ", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'pathlib' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "file system",
+      "attack": "shutil copy",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'shutil' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "file system",
+      "attack": "io.open write",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": ">\n    result = g['run'](rows, spec.get('ctx', {}))\n  File \"generated.py\", line 3, in run\nAttributeError: 'types.SimpleNamespace' object has no attribute 'open'\n"
+      }
+    },
+    {
+      "category": "file system",
+      "attack": "codecs write",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'codecs' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "processes",
+      "attack": "os.system",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "s.py\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'os' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "processes",
+      "attack": "subprocess.run",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "ine 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'subprocess' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "processes",
+      "attack": "multiprocessing",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "0, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'multiprocessing' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "processes",
+      "attack": "pty spawn",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": ".py\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'pty' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "host access",
+      "attack": "read environment variables",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "s.py\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'os' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "host access",
+      "attack": "ctypes libc call",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'ctypes' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "host access",
+      "attack": "pickle payload",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'pickle' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "host access",
+      "attack": "importlib",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'importlib' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "host access",
+      "attack": "builtins module",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": " line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'builtins' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "escape tricks",
+      "attack": "__import__('os')",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "s.py\", line 20, in _guarded_import\n    raise ImportError(\"import of %r is blocked in the sandbox\" % name)\nImportError: import of 'os' is blocked in the sandbox\n"
+      }
+    },
+    {
+      "category": "escape tricks",
+      "attack": "__subclasses__ walk",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": false,
+        "layer": "NOT BLOCKED",
+        "status": "passed",
+        "error": ""
+      }
+    },
+    {
+      "category": "escape tricks",
+      "attack": "__class__ / __mro__ walk",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "tmpfdn1o_rp/harness.py\", line 36, in <module>\n    result = g['run'](rows, spec.get('ctx', {}))\n  File \"generated.py\", line 3, in run\nKeyError: '__subclasses__'\n"
+      }
+    },
+    {
+      "category": "escape tricks",
+      "attack": "__globals__ of a function",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": false,
+        "layer": "NOT BLOCKED",
+        "status": "passed",
+        "error": ""
+      }
+    },
+    {
+      "category": "escape tricks",
+      "attack": "eval()",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "/harness.py\", line 36, in <module>\n    result = g['run'](rows, spec.get('ctx', {}))\n  File \"generated.py\", line 2, in run\nNameError: name 'eval' is not defined\n"
+      }
+    },
+    {
+      "category": "escape tricks",
+      "attack": "exec()",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "/harness.py\", line 36, in <module>\n    result = g['run'](rows, spec.get('ctx', {}))\n  File \"generated.py\", line 2, in run\nNameError: name 'exec' is not defined\n"
+      }
+    },
+    {
+      "category": "escape tricks",
+      "attack": "compile()",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "rness.py\", line 36, in <module>\n    result = g['run'](rows, spec.get('ctx', {}))\n  File \"generated.py\", line 2, in run\nNameError: name 'compile' is not defined\n"
+      }
+    },
+    {
+      "category": "escape tricks",
+      "attack": "getattr on builtins",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "static check",
+        "status": "refused",
+        "error": null
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "rness.py\", line 36, in <module>\n    result = g['run'](rows, spec.get('ctx', {}))\n  File \"generated.py\", line 2, in run\nNameError: name 'getattr' is not defined\n"
+      }
+    },
+    {
+      "category": "resources",
+      "attack": "infinite loop",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "sandbox timeout"
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": "sandbox timeout"
+      }
+    },
+    {
+      "category": "resources",
+      "attack": "memory bomb",
+      "full_pipeline": {
+        "blocked": false,
+        "layer": "NOT BLOCKED",
+        "status": "passed",
+        "error": ""
+      },
+      "sandbox_alone": {
+        "blocked": false,
+        "layer": "NOT BLOCKED",
+        "status": "passed",
+        "error": ""
+      }
+    },
+    {
+      "category": "resources",
+      "attack": "unbounded output",
+      "full_pipeline": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": ""
+      },
+      "sandbox_alone": {
+        "blocked": true,
+        "layer": "sandbox",
+        "status": "failed",
+        "error": ""
+      }
+    }
+  ]
+}

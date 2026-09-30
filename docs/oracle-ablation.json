@@ -1,0 +1,805 @@
+{
+  "mutants": 50,
+  "correct_code_passes": {
+    "fixture": true,
+    "realistic": true
+  },
+  "sheets": {
+    "fixture_3_rows": {
+      "caught": {
+        "static": 11,
+        "sandbox": 18,
+        "oracle": 43
+      },
+      "by_category": {
+        "wrong rows": {
+          "n": 19,
+          "static": 0,
+          "sandbox": 0,
+          "oracle": 14
+        },
+        "off by one": {
+          "n": 5,
+          "static": 0,
+          "sandbox": 0,
+          "oracle": 5
+        },
+        "wrong column": {
+          "n": 8,
+          "static": 0,
+          "sandbox": 0,
+          "oracle": 6
+        },
+        "crash / bad output": {
+          "n": 8,
+          "static": 1,
+          "sandbox": 8,
+          "oracle": 8
+        },
+        "forbidden": {
+          "n": 10,
+          "static": 10,
+          "sandbox": 10,
+          "oracle": 10
+        }
+      },
+      "missed_by_oracle": [
+        "status rule dropped",
+        "status ignored via ctx",
+        "wrong ctx key for status",
+        "missing-date check inverted",
+        "case-folded status compare",
+        "effect set to update_status",
+        "effect key missing"
+      ],
+      "detail": [
+        {
+          "category": "wrong rows",
+          "fault": "status check inverted",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "status rule dropped",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "wrong rows",
+          "fault": "date rule dropped",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "status ignored via ctx",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "wrong rows",
+          "fault": "date ignored via ctx",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "wrong status hardcoded",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "wrong ctx key for status",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "wrong rows",
+          "fault": "wrong ctx key for date",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "missing-date check inverted",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "wrong rows",
+          "fault": "case-folded status compare",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "wrong rows",
+          "fault": "break instead of continue (status)",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "break instead of continue (date)",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "returns every row",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "returns nothing",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "drops first result",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "keeps first result only",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "duplicates results",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "month-level date compare",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "year-level date compare",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "due date >= instead of >",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "due date < instead of >",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "due date <= instead of >",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "cut-off one day early",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "cut-off one day late",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "status read from Name",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "date read from Name",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "ID taken from Name",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "ID column typo",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "status column typo",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "date column typo",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "effect set to update_status",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "wrong column",
+          "fault": "effect key missing",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "division by zero",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "missing column raises KeyError",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "returns None",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "returns a dict",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "returns bare IDs",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "unbounded output",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "infinite loop",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "no run() entry point",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import os",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import socket",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import subprocess",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import urllib.request",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import shutil",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "open() a file",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "__import__('os')",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "eval()",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "exec()",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "getattr on builtins",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        }
+      ]
+    },
+    "realistic_12_rows": {
+      "caught": {
+        "static": 11,
+        "sandbox": 18,
+        "oracle": 47
+      },
+      "by_category": {
+        "wrong rows": {
+          "n": 19,
+          "static": 0,
+          "sandbox": 0,
+          "oracle": 18
+        },
+        "off by one": {
+          "n": 5,
+          "static": 0,
+          "sandbox": 0,
+          "oracle": 5
+        },
+        "wrong column": {
+          "n": 8,
+          "static": 0,
+          "sandbox": 0,
+          "oracle": 6
+        },
+        "crash / bad output": {
+          "n": 8,
+          "static": 1,
+          "sandbox": 8,
+          "oracle": 8
+        },
+        "forbidden": {
+          "n": 10,
+          "static": 10,
+          "sandbox": 10,
+          "oracle": 10
+        }
+      },
+      "missed_by_oracle": [
+        "missing-date check inverted",
+        "effect set to update_status",
+        "effect key missing"
+      ],
+      "detail": [
+        {
+          "category": "wrong rows",
+          "fault": "status check inverted",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "status rule dropped",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "date rule dropped",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "status ignored via ctx",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "date ignored via ctx",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "wrong status hardcoded",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "wrong ctx key for status",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "wrong ctx key for date",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "missing-date check inverted",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "wrong rows",
+          "fault": "case-folded status compare",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "break instead of continue (status)",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "break instead of continue (date)",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "returns every row",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "returns nothing",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "drops first result",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "keeps first result only",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "duplicates results",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "month-level date compare",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong rows",
+          "fault": "year-level date compare",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "due date >= instead of >",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "due date < instead of >",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "due date <= instead of >",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "cut-off one day early",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "off by one",
+          "fault": "cut-off one day late",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "status read from Name",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "date read from Name",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "ID taken from Name",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "ID column typo",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "status column typo",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "date column typo",
+          "static": false,
+          "sandbox": false,
+          "oracle": true
+        },
+        {
+          "category": "wrong column",
+          "fault": "effect set to update_status",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "wrong column",
+          "fault": "effect key missing",
+          "static": false,
+          "sandbox": false,
+          "oracle": false
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "division by zero",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "missing column raises KeyError",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "returns None",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "returns a dict",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "returns bare IDs",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "unbounded output",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "infinite loop",
+          "static": false,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "crash / bad output",
+          "fault": "no run() entry point",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import os",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import socket",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import subprocess",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import urllib.request",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "import shutil",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "open() a file",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "__import__('os')",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "eval()",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "exec()",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        },
+        {
+          "category": "forbidden",
+          "fault": "getattr on builtins",
+          "static": true,
+          "sandbox": true,
+          "oracle": true
+        }
+      ]
+    }
+  }
+}

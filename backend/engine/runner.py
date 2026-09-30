@@ -19,7 +19,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from backend.engine.generation import static_check
+from backend.engine.generation import ALLOWED_MODULES, static_check
 
 RUNNER_GUARD = '''
 # Sandbox startup guard (runs before any harness or generated code).
@@ -36,7 +36,15 @@ SAFE_BUILTINS = {
         "str", "sum", "tuple", "type", "zip",
     ) if hasattr(builtins, _name)
 }
-SAFE_BUILTINS["__import__"] = __import__  # allowlist-enforced at submit time
+_REAL_IMPORT = __import__
+def _guarded_import(name, globals=None, locals=None, fromlist=(), level=0):
+    if level or name.split(".")[0] not in _ALLOWED_MODULES:
+        raise ImportError("import of %r is blocked in the sandbox" % name)
+    if name == "io":
+        import io as _io, types as _types
+        return _types.SimpleNamespace(StringIO=_io.StringIO, BytesIO=_io.BytesIO)
+    return _REAL_IMPORT(name, globals, locals, fromlist, level)
+SAFE_BUILTINS["__import__"] = _guarded_import
 SAFE_BUILTINS["__build_class__"] = getattr(builtins, "__build_class__", None)
 SAFE_BUILTINS["__name__"] = "generated"
 # Note: open/exec/eval/compile/input are absent from SAFE_BUILTINS, so the
@@ -48,7 +56,8 @@ def _build_harness() -> str:
     return (
         # RUNNER_GUARD runs FIRST: network + dangerous builtins hard-blocked
         # before any generated code is compiled (docstring promise, now true).
-        RUNNER_GUARD + "\n"
+        f"_ALLOWED_MODULES = {sorted(ALLOWED_MODULES)!r}\n"
+        + RUNNER_GUARD + "\n"
         "import json, sys\n"
         "spec = json.loads(sys.argv[1])\n"
         "rows = spec['rows']\n"

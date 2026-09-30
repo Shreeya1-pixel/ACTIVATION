@@ -1,6 +1,6 @@
 # Scope: what's done and what's next
 
-**Known limits:** detection accuracy is measured on synthetic workspaces, and the loop is tested on sample and practice sheets; there are no real-office pilots of AutoStack yet.
+**Known limits:** detection accuracy is measured on synthetic workspaces, and the loop is tested on sample and practice sheets; there are no real-office pilots of AutoStack yet. The oracle checks which rows are selected, not the effect label. On macOS the sandbox cannot cap memory.
 
 ## Done and tested
 
@@ -22,6 +22,8 @@
 | Browser capture | Prototype extension; folder watching is the supported path | Harden the extension |
 | Cloud demo | Live on Railway: [activation-frontend-production.up.railway.app](https://activation-frontend-production.up.railway.app/) (Dockerfiles and `railway.json` included) | Folder capture in the cloud watches the server's volume; for your own files, run the worker locally |
 | PII detection | Pattern and field-name based | Add name detection for free text |
+| Oracle coverage | Compares the selected row IDs; the effect label is not checked | Compare the effect too |
+| Sandbox memory cap | Enforced where the OS supports an address-space limit; not on macOS | Verify on Linux; add a memory watchdog on macOS |
 | Measured impact | Savings are illustrative | Pilots with 3 UAE small offices |
 
 ## Longer-term roadmap

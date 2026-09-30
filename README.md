@@ -13,7 +13,9 @@
 | The loop | **Identify → Generate → Test & self-repair → Approve → Dry run → Go live**, in one app |
 | Live proof, no sample data | **Try it live:** edit a sheet, and AutoStack identifies your routine, writes and repairs the code, tests it on a copy of *your* sheet, dry-runs it and runs it, with undo |
 | Detection accuracy | Precision / recall **1.00 / 1.00** on 500 synthetic workspaces; **0.97 / 0.999** with 15% of steps interrupted (0.81 / 0.93 without our stitching step) |
-| Tests | **203 pass**, 2 skipped, 29 subtests; plus 250 live-stack checks (54 end-to-end, 31 scenarios, 165 authorization) |
+| Does the test really catch bad code? | Of 50 deliberately broken programs, the independent oracle catches **47**; a safety check alone catches 11, a sandbox run without expected results 18 |
+| Sandbox | **29 of 30** attack attempts blocked (network, files, processes, escape tricks); tampered shared templates are refused (**409**) |
+| Tests | **216 pass**, 2 skipped, 29 subtests; plus 250 live-stack checks (54 end-to-end, 31 scenarios, 165 authorization) |
 | Real-world grounding | Our hand-built automations (not AutoStack itself) are used by TÜV Rheinland staff in Dubai: 20 certificate invoices in 5 minutes instead of 1–2 hours for 2–3 people |
 | Footprint | Runs on the office PC: under 100 MiB RAM, 0.47% idle CPU (measured on Windows); no API key needed |
 
@@ -42,6 +44,8 @@ There is also a sample workspace (`scripts/load_demo.py`) with messy invented UA
 
 ## What makes it different
 
+Task-mining tools detect; code assistants generate. AutoStack closes the loop: what it detects becomes the specification, the expected results are derived from that specification independently of the generated code, and nothing runs until the code matches them.
+
 - **It tells you what to automate.** ChatGPT and Copilot write code only once you describe the task, and task-mining tools stop at a report. AutoStack goes from what you did to a tested automation.
 - **It proves the code before trusting it.** Generated code is tested against an independent check built from the confirmed plan, on a copy of your own sheet. Failures go back to the AI, which repairs its code (up to 3 attempts).
 - **A person stays accountable.** Approval is bound to the exact code (SHA-256) and its passing test, and every run can be undone and appears in a tamper-evident log.
@@ -68,13 +72,20 @@ Savings maths, viability and the adoption path: [docs/impact.md](docs/impact.md)
 
 **Not yet:** writing back to `.xlsx` (CSV today) and rules with more than one condition (by 14 Nov); browser capture is a prototype; no pilots yet (planned Dec to Feb, starting with the TÜV teams). Details: [docs/scope.md](docs/scope.md).
 
-**Known limits:** detection accuracy is measured on synthetic workspaces, and the loop is tested on sample and practice sheets; there are no real-office pilots of AutoStack yet.
+**Known limits:** detection accuracy is measured on synthetic workspaces, and the loop is tested on sample and practice sheets; there are no real-office pilots of AutoStack yet. The oracle checks which rows are selected, not the effect label, so a program that selects the right rows but does the wrong action passes it. On macOS the sandbox cannot cap memory (a memory bomb is the one attack of 30 not blocked there).
 
 ## Testing
 
 ```bash
-.venv/bin/python -m pytest tests/ -q     # 203 passed, 2 skipped, 29 subtests
+.venv/bin/python -m pytest tests/ -q     # 216 passed, 2 skipped, 29 subtests
+.venv/bin/python scripts/oracle_ablation.py        # 50 broken programs: static 11, sandbox 18, oracle 47
+.venv/bin/python scripts/sandbox_attacks.py        # 30 attacks: 29 blocked
+.venv/bin/python scripts/registry_tamper_demo.py   # 5 tampered templates: all refused with 409
 ```
+
+| Self-repair: attempt 1 is caught, attempt 2 passes | Tampered shared templates are refused |
+|---|---|
+| ![Self-repair](docs/images/self-repair.png) | ![Registry tamper](docs/images/registry-tamper.png) |
 
 Benchmark, live-stack suites and what each covers: [docs/testing.md](docs/testing.md).
 
