@@ -1,5 +1,7 @@
 # Scope: what's done and what's next
 
+**Known limits:** detection accuracy is measured on synthetic workspaces, and the loop is tested on sample and practice sheets; there are no real-office pilots of AutoStack yet.
+
 ## Done and tested
 
 | Loop step | Status |

@@ -1,5 +1,7 @@
 # How AutoStack works
 
+![AutoStack architecture: file watcher and UI on the office PC, a Python worker that detects, drafts, sandboxes and runs automations, and local storage with an audit chain and a signed template registry](images/architecture.png)
+
 ## The loop, step by step
 
 AutoStack closes the whole loop, from noticing the work to running it safely:

@@ -65,6 +65,8 @@ Savings maths, viability and the adoption path: [docs/impact.md](docs/impact.md)
 
 **Not yet:** writing back to `.xlsx` (CSV today) and rules with more than one condition (by 14 Nov); browser capture is a prototype; no pilots yet (planned Dec to Feb, starting with the TÜV teams). Details: [docs/scope.md](docs/scope.md).
 
+**Known limits:** detection accuracy is measured on synthetic workspaces, and the loop is tested on sample and practice sheets; there are no real-office pilots of AutoStack yet.
+
 ## Testing
 
 ```bash
@@ -77,7 +79,7 @@ Benchmark, live-stack suites and what each covers: [docs/testing.md](docs/testin
 
 | Doc | What's in it |
 |---|---|
-| [docs/architecture.md](docs/architecture.md) | The loop step by step, how each part is built, detection benchmark and ablation, stack, roles, registry, PII |
+| [docs/architecture.md](docs/architecture.md) | Architecture diagram, the loop step by step, how each part is built, detection benchmark and ablation, stack, roles, registry, PII |
 | [docs/comparison.md](docs/comparison.md) | What makes it different, related work, feature comparison |
 | [docs/impact.md](docs/impact.md) | Evidence, TÜV case, savings maths, viability, adoption path |
 | [docs/setup.md](docs/setup.md) | Full quick start, sample workspace, configuration, repository layout, Railway deployment |
