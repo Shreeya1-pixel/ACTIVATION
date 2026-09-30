@@ -13,7 +13,7 @@
 | The loop | **Identify → Generate → Test & self-repair → Dry run → Go live**, end to end in one app |
 | Live proof, no sample data | **Try it live**: you edit a real sheet, AutoStack identifies your routine, writes and repairs the code, tests it on a copy of *your* sheet, dry-runs it and runs it on the same file, with undo |
 | Detection accuracy | **Precision 1.00 / recall 1.00** on 500 synthetic workspaces (982 planted patterns, 983 near-misses); **0.97 / 0.999** when 15% of steps are interrupted (0.81 / 0.93 with our stitching step switched off) |
-| Real-world grounding | Team members' hand-built automations are used by **TÜV Rheinland staff in Dubai** today: 20 Kuwait certificate invoices in 5 minutes (1–2 hours for 2–3 people by hand); shipment certificates in 5–7 minutes instead of 2–3 hours. AutoStack is how an office gets this without a developer |
+| Real-world grounding | Team members' hand-built automations (not AutoStack itself) are used by **TÜV Rheinland staff in Dubai** today: 20 certificate invoices in 5 minutes on an internal portal (1–2 hours for 2–3 people by hand); shipment certificates in 5–7 minutes instead of 2–3 hours. AutoStack is how an office gets this without a developer |
 | Automated tests | **203 pass**, 2 skipped, 29 subtests (26 test files), including a full end-to-end test of the loop on user edits |
 | Live-stack checks | **250 pass**: 54/54 end-to-end · 31/31 scenario battery · 165/165 authorization matrix |
 | Code | 7,422 lines of backend Python · 6,240 lines of frontend · 4,286 lines of tests |
@@ -189,8 +189,8 @@ The sheets are deliberately messy: blank rows, rows with no ID, mixed date forma
 
 | Tool (hand-built, in use) | By hand | With the tool |
 |---|---|---|
-| Kuwait certificates: reads invoice PDFs and fills the certificate in TÜV's SAP portal | 1–2 hours for 2–3 people per 20 invoices | **20 invoices in 5 minutes** |
-| SABER shipment certificates | 2–3 hours per certificate (TÜV estimate from the task breakdown) | **5–7 minutes**; about **48 hours a month** freed at 20 certificates a month |
+| Certificate invoices: reads invoice PDFs and fills the certificate in TÜV's internal portal | 1–2 hours for 2–3 people per 20 invoices | **20 invoices in 5 minutes** |
+| Shipment certificates on an internal portal | 2–3 hours per certificate (TÜV estimate from the task breakdown) | **5–7 minutes**; about **40–60 hours a month** freed at 20 certificates a month |
 | Factory-audit reports | Matching each factory's document list to the audit checklist by hand | 47 checklist items across 19 sections matched and 12 photos placed per run (~8,300 lines of code) |
 
 Each of these needed a developer for weeks. AutoStack exists so the next office doesn't.
@@ -198,7 +198,7 @@ Each of these needed a developer for weeks. AutoStack exists so the next office 
 > "I would use it. It feels like it would save us a lot of time."
 > **Technical Officer (Conformity Assessment Engineer), TÜV Rheinland Middle East**, after seeing AutoStack (one of 5 office and factory workers who gave early feedback, September 2026)
 
-**AutoStack on a TÜV-style task (timed).** From 3 example edits on an invoice-review sheet with invented data, AutoStack identified the routine, planned the rule, wrote and self-checked the code, tested it on a copy of the sheet, dry-ran it and ran it live on the 5 remaining invoices in **0.4 seconds of processing** (offline generator; a Gemini call adds a few seconds; the person's edits and approval click are not counted). This is a simpler routine than the SAP-portal tool above, which AutoStack cannot build yet because it writes CSV; it shows the loop, not a like-for-like replacement.
+**AutoStack on a TÜV-style task (timed).** From 3 example edits on an invoice-review sheet with invented data, AutoStack identified the routine, planned the rule, wrote and self-checked the code, tested it on a copy of the sheet, dry-ran it and ran it live on the 5 remaining invoices in **0.4 seconds of processing** (offline generator, simple routine; a Gemini call adds a few seconds; the person's edits and approval click are not counted). This is a simpler routine than the internal-portal tools above, which AutoStack cannot build yet because it writes CSV; it shows the loop, not a like-for-like replacement.
 
 **Who it's for:** offices of 2 to 50 people whose work already lives in spreadsheets, such as trading companies, clinics, facility services, logistics and accounting firms.
 
