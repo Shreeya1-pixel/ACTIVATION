@@ -18,7 +18,7 @@ import urllib.request
 
 from backend.security import pii
 
-GEMINI_MODEL = "gemini-2.0-flash"
+GEMINI_MODEL = os.environ.get("AUTOSTACK_GEMINI_MODEL", "gemini-2.5-flash")
 GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
 TIMEOUT_S = 20
 
@@ -85,7 +85,7 @@ def _gemini_text(prompt: str, context: dict, api_key: str) -> str:
         "contents": [{
             "parts": [{"text": prompt + "\n\nCONTEXT: " + json.dumps(context, sort_keys=True, default=str)}],
         }],
-        "generationConfig": {"temperature": 0.4, "maxOutputTokens": 512},
+        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 4096},
     }
     req = urllib.request.Request(
         GEMINI_ENDPOINT.format(model=GEMINI_MODEL, key=api_key),
@@ -99,9 +99,20 @@ def _gemini_text(prompt: str, context: dict, api_key: str) -> str:
     except Exception as exc:  # network, HTTP, JSON — all fail closed
         raise GenerationError(f"gemini request failed: {exc}") from exc
     try:
-        return data["candidates"][0]["content"]["parts"][0]["text"]
+        parts = data["candidates"][0]["content"]["parts"]
+        text = "".join(p.get("text", "") for p in parts if not p.get("thought"))
+        if not text:
+            raise KeyError("no text parts")
+        return text
     except (KeyError, IndexError, TypeError) as exc:
         raise GenerationError(f"gemini response malformed: {json.dumps(data)[:200]}") from exc
+
+
+def model_label() -> str:
+    """What actually writes the code right now, as shown to the user."""
+    if os.environ.get("AUTOSTACK_AI_PROVIDER", "mock") == "gemini" and os.environ.get("AUTOSTACK_GEMINI_KEY"):
+        return GEMINI_MODEL
+    return "offline generator (no LLM call)"
 
 
 def generate_text(prompt: str, context: dict | None = None, *, provider: str | None = None,

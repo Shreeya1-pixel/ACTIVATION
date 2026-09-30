@@ -24,6 +24,7 @@ from sqlalchemy.orm import Session
 from backend import spike_config as cfg
 from backend.db import engine as db_engine, get_db
 from backend.engine import journal, preflight, rows
+from backend.engine import ai as ai_mod
 from backend.engine.catalog import validate_graph
 from backend.models import (AuditEntry, Candidate, Draft, Event, Run, RunNodeRecord,
                             Setting, Workflow, WorkflowVersion, Base)
@@ -970,6 +971,8 @@ def generate_artifact(body: GenerateBody, db: Session = Depends(get_db)):
             attempts = [{**one, "attempt": 1, "problems": list(one["violations"]), "self_check": None}]
     except gen.PlanError as exc:
         raise HTTPException(status_code=422, detail={"error": str(exc)})
+    except ai_mod.GenerationError as exc:
+        raise HTTPException(status_code=502, detail={"error": f"AI model unavailable: {exc}"})
     base = db.query(GeneratedArtifact).filter(GeneratedArtifact.plan_id == plan_row.id).count()
     art = None
     log = []
@@ -1011,6 +1014,7 @@ def generate_artifact(body: GenerateBody, db: Session = Depends(get_db)):
             "violations": final["violations"], "code_sha256": art.code_sha256,
             "attempts": log, "repaired": len(attempts) > 1 and not final["problems"],
             "provider": _os.environ.get("AUTOSTACK_AI_PROVIDER", "mock"),
+            "model": ai_mod.model_label(),
             "self_check": (final["self_check"] or {}).get("status")}
 
 

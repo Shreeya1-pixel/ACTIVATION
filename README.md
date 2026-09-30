@@ -6,18 +6,20 @@
 >
 > Other tools wait for you to design an automation. AutoStack watches the spreadsheets you already use, works out what can be automated, generates the code, tests it in a sandbox, feeds any failure back to the AI to fix, previews exactly what it would change, and only then runs it for real. Every step goes into a tamper-evident audit log.
 
-**Demo video:** [Google Drive](https://drive.google.com/file/d/11lU6d4mTxDCkl8erF6AZy_DYP-136ZwN/view?usp=drivesdk)
+**Demo video:** [Google Drive](https://drive.google.com/file/d/1LydXr6ZuxiZvZcZXRW4YEmrSyX3QOylo/view?usp=sharing) · **Live app:** [activation-frontend-production.up.railway.app](https://activation-frontend-production.up.railway.app/) · **Repository:** [github.com/Shreeya1-pixel/ACTIVATION](https://github.com/Shreeya1-pixel/ACTIVATION)
 
 | At a glance | |
 |---|---|
 | The loop | **Identify → Generate → Test & self-repair → Dry run → Go live**, end to end in one app |
-| Detection accuracy | **Precision 1.00 / recall 1.00** on 500 synthetic workspaces (982 planted patterns, 983 near-misses); **0.97 / 0.999** when 15% of steps are interrupted |
-| Automated tests | **197 pass**, 2 skipped, 29 subtests (25 test files) |
+| Live proof, no sample data | **Try it live**: you edit a real sheet, AutoStack identifies your routine, writes and repairs the code, tests it on a copy of *your* sheet, dry-runs it and runs it on the same file, with undo |
+| Detection accuracy | **Precision 1.00 / recall 1.00** on 500 synthetic workspaces (982 planted patterns, 983 near-misses); **0.97 / 0.999** when 15% of steps are interrupted (0.81 / 0.93 with our stitching step switched off) |
+| Real-world grounding | Team members' hand-built automations are used by **TÜV Rheinland staff in Dubai** today: 20 Kuwait certificate invoices in 5 minutes (1–2 hours for 2–3 people by hand); shipment certificates in 5–7 minutes instead of 2–3 hours. AutoStack is how an office gets this without a developer |
+| Automated tests | **203 pass**, 2 skipped, 29 subtests (26 test files), including a full end-to-end test of the loop on user edits |
 | Live-stack checks | **250 pass**: 54/54 end-to-end · 31/31 scenario battery · 165/165 authorization matrix |
 | Code | 7,422 lines of backend Python · 6,240 lines of frontend · 4,286 lines of tests |
 | API | 99 routes · 28 database tables · 7 workflow node types |
 | Footprint (measured on Windows) | 15.1 ms per capture poll · 0.47% idle CPU · 98.5 MiB RAM |
-| Try it | Clone to a detected pattern in **about 5 minutes**, no API key needed |
+| Try it | Clone to your own automated routine in **about 5 minutes**, no API key needed |
 
 ---
 
@@ -47,11 +49,11 @@ AutoStack closes the whole loop, from noticing the work to running it safely:
 
 | Step | What happens | How it is built | Proof in the repo |
 |---|---|---|---|
-| **1. Identify** | Point AutoStack at any folder of CSV or Excel files. It compares every save row by row and finds the same ordered edits repeated **3+ times across 2+ records**. Reformatting a date or amount is ignored. Routines interrupted by a coffee break are stitched back together. | Per-record instances with a 10-minute gap rule, 45-minute stitching when the joined routine itself repeats, fragment folding, value normalisation; you pick the ID column and the columns that matter | `backend/detection/sequences.py`; benchmark precision/recall 1.00 on clean data; sample replay detects 2 real patterns and rejects 2 near-misses |
-| **2. Generate** | AI turns the detected pattern into a structured plan, then into runnable Python code (`run(rows, ctx)`). Personal data is tokenised before any external AI call. | Gemini or a deterministic offline mock; plan validation; code hashed with SHA-256 | `backend/engine/generation.py`, `backend/engine/ai.py` |
-| **3. Test & self-repair** | The generated code is statically checked (allowlist, banned constructs, size cap), then executed in a hardened sandbox and compared with an independent oracle computed from the plan. **Any failure (forbidden import, crash, wrong rows) is turned into specific feedback and sent back to the AI, which rewrites the code: up to 3 attempts.** Every attempt is kept and audited; superseded or failing versions can never be tested or activated. | Fresh subprocess, sockets blocked, builtins stripped, CPU and memory limits, wall-clock kill; `generate_with_repair` loop | `backend/engine/generation.py`, `backend/engine/runner.py`; 9 self-repair tests |
-| **4. Dry run** | Before a live run, preview exactly which rows would be updated and which messages drafted. **Nothing is written.** A preflight check also confirms every file and column the automation needs still exists. | `dry_run: true` on runs; preflight on every run | *Dry run* button on the Workflows page; `test_dry_run_computes_but_does_not_apply`; 4 preflight tests |
-| **5. Go live** | Only after a person approves that exact code and its passing test does it run, on a schedule, a file change, a webhook or on demand. | Exactly-once journal, idempotent steps, cancel and rollback, SHA-256 hash-chained audit log | 31/31 scenario battery; *Verify chain* on the Trust Log page |
+| **1. Identify** | Point AutoStack at any folder of CSV or Excel files. It compares every save row by row and finds the same ordered edits repeated **3+ times across 2+ records**. Reformatting a date or amount is ignored. Routines interrupted by a coffee break are stitched back together. | Per-record instances with a 10-minute gap rule, 45-minute stitching when the joined routine itself repeats, fragment folding, value normalisation; you pick the ID column and the columns that matter | `backend/detection/sequences.py`; benchmark precision/recall 1.00 on clean data; sample replay detects 2 real patterns and rejects 2 near-misses; **Try it live** detects a routine from your own edits |
+| **2. Generate** | AutoStack reads the sheet to learn the rule from the rows you finished (which column marks the work as waiting, and which values every finished row ends with), shows it in plain words for you to confirm, then AI turns it into runnable Python code (`run(rows, ctx)`). Every file is written to disk (`plan.json`, `automation_vN.py`). Personal data is tokenised before any external AI call. | Gemini or a deterministic offline mock; plan validation; code hashed with SHA-256 | `backend/engine/generation.py`, `backend/engine/ai.py` |
+| **3. Test & self-repair** | The generated code is statically checked (allowlist, banned constructs, size cap), then executed in a hardened sandbox **on a copy of the sheet being automated** (plus plan-derived edge-case rows) and compared with an independent oracle computed from the plan. **Any failure (forbidden import, crash, wrong rows) is turned into specific feedback and sent back to the AI, which rewrites the code: up to 3 attempts.** Every attempt is kept and audited; superseded or failing versions can never be tested or activated. | Fresh subprocess, sockets blocked, builtins stripped, CPU and memory limits, wall-clock kill; `generate_with_repair` loop | `backend/engine/generation.py`, `backend/engine/runner.py`; 10 self-repair tests |
+| **4. Dry run** | Before a live run, preview exactly which rows would be updated and which messages drafted. **Nothing is written.** A preflight check also confirms every file and column the automation needs still exists. | `dry_run: true` on runs; preflight on every run | Before/after `dry_run.diff` on Try it live; *Dry run* button on the Workflows page; `test_dry_run_computes_but_does_not_apply`; 4 preflight tests |
+| **5. Go live** | Only after a person approves that exact code and its passing test does it run, on a schedule, a file change, a webhook or on demand. | Exactly-once journal, idempotent steps, cancel and rollback (multi-column), SHA-256 hash-chained audit log | `test_practice_end_to_end`; 31/31 scenario battery; *Verify chain* on the Trust Log page |
 
 **Why this matters:** each step catches a different failure. Identification keeps you from automating noise. The sandbox catches broken code, and self-repair fixes it without a developer. The dry run catches "right code, wrong rows". Approval keeps a person accountable. The audit log proves what happened afterwards.
 
@@ -64,8 +66,8 @@ Everything here uses **sample data**: invented UAE-style companies, fake TRNs an
 **Prerequisites:** Python 3.11+ and Node.js 18+.
 
 ```bash
-git clone https://github.com/allurimohansrisaivarma-coder/autostack-in.git
-cd autostack-in
+git clone https://github.com/Shreeya1-pixel/ACTIVATION.git
+cd ACTIVATION
 
 python -m venv .venv
 # macOS / Linux
@@ -75,6 +77,16 @@ python -m venv .venv
 
 cd frontend && npm install && cd ..
 ```
+
+**Fastest proof: Try it live (no sample data, about 3 minutes).** Start the app (Step 2 below), register, and open **Product → Try it live**:
+
+1. **Start practice workspace.** A real folder with one invoice sheet and no history. **Open in Excel** opens it, or edit it in the page.
+2. **Do your normal work** on 3 invoices: set *Status* to *Approved* and *Checked By* to your initials, save; set *Payment Requested* to *Yes*, save; click **Done**. The log shows each change AutoStack captured from the saved file.
+3. **Identified:** a card shows the routine it found, in plain words, with the rows it saw it on.
+4. **⚡ Automate this:** an IDE-style view shows the pipeline live. Files appear as they are written, the code types in, the sandbox runs on a copy of your sheet, and (with *broken draft* ticked) a failing first version is caught and repaired by the AI.
+5. **Approve**, then read `dry_run.diff` (every change, nothing written), then **Go live**. The rows change in the real file; **Undo this run** puts them back.
+
+The *Done* button closes a routine immediately; in normal use detection waits for 10 quiet minutes instead.
 
 **Step 1: load the sample workspace (30 seconds).**
 
@@ -131,17 +143,20 @@ The sheets are deliberately messy: blank rows, rows with no ID, mixed date forma
 
 1. **It tells you what to automate.** Zapier, Make, n8n and Power Automate start from a blank canvas: someone has to know what to build. AutoStack starts from how people actually work and proposes automations with evidence attached: how many times, for which records, in what order.
 2. **It writes the automation for you, and fixes its own mistakes.** The detected pattern becomes a plan and then runnable code automatically. If the code fails the sandbox, the exact failure goes back to the AI and it tries again. There is no flow-builder to learn and no developer needed.
-3. **It proves the automation before trusting it.** Generated code must pass static checks and a sandboxed run, and a dry run shows its real effect on your data, before anyone can switch it on. Most tools only find out an automation is wrong after it has run.
+3. **It proves the automation before trusting it.** Generated code must pass static checks and a sandboxed run on a copy of your own sheet, and a dry run shows its real effect row by row, before anyone can switch it on. Most tools only find out an automation is wrong after it has run.
 4. **A person stays accountable.** Approval is bound to the exact code (by SHA-256) and its passing test. Change the code and it must be tested and approved again.
-5. **Safe to share between offices.** Approved automations can be published to a registry as Ed25519-signed templates with permissions derived from what they actually do. Imports arrive untrusted and must re-pass the sandbox locally. Templates can be withdrawn or revoked.
+5. **Safe to share between offices, like signed apps.** Approved automations can be published to a registry as Ed25519-signed templates with permissions derived from what they actually do, never self-declared. Imports arrive untrusted and must re-pass the sandbox on the receiving office's own machine. A publisher can withdraw a template (no new installs) or revoke it (every installed copy switches off). We have not seen this in any automation tool aimed at small offices.
 6. **Private by default.** Everything runs on the office PC. With the offline AI mode nothing leaves the machine; with Gemini, personal data is tokenised first and restored locally.
+
+**Related work, and what is ours.** Learning from examples is not new: Excel's Flash Fill learns a transformation from a few typed examples, RPA recorders replay recorded clicks, and task-mining tools (UiPath Task Mining, Power Automate Process Advisor, Celonis) find processes for enterprises so a developer can build them. Code assistants such as ChatGPT or Copilot write code, but only after you describe the task. What AutoStack adds is the chain between them, with checks at every link: generated code is tested against an **independent oracle** built from the confirmed plan (not from the model's own claims) and **repaired automatically** until it passes; **approval is bound to the exact code** and its passing test; and automations are **shared as signed, scoped, revocable templates**.
 
 ## 5. How it is built
 
 | Area | Implementation | Evidence |
 |---|---|---|
 | Detection | Per-record instances with a 10-minute gap split, 45-minute stitching of interrupted routines (only when the joined routine itself meets the rule), fragment folding. Trailing open instances are not counted. Needs 3+ occurrences across 2+ records. Step labels include the changed fields | `backend/detection/sequences.py`, benchmark below, 6 quality tests |
-| Self-repairing generation | Static and sandbox failures converted to model-readable feedback (`report_problems`), previous code and feedback sent back, capped at 3 attempts, every version preserved and audited | `backend/engine/generation.py`, 9 tests |
+| Rule learning | From an identified routine, reads the sheet: the columns the routine changed, the value every finished row ends with, and the value the waiting rows still have. Values that could escape a rule (quotes, `;`, `{}`) are refused. Multi-column updates, each exactly-once and reversible | `backend/practice.py`, `backend/engine/graph_build.py`, `tests/spike/test_practice_end_to_end.py` |
+| Self-repairing generation | Static and sandbox failures converted to model-readable feedback (`report_problems`), previous code and feedback sent back, capped at 3 attempts, every version preserved, audited and written to disk. The self-check adds boundary rows from the plan (due one day after the cut-off, due on it) so a missing rule cannot pass | `backend/engine/generation.py`, 10 tests |
 | Capture | Any ID column with a duplicate-ID check. Per-file column selection. CSV and XLSX (zip-bomb checked). Configurable folder, with system and home roots blocked | `backend/capture/`, 12 tests |
 | Sandbox | Static allowlist, banned constructs, 20 KB cap. Fresh subprocess with sockets blocked, builtins stripped, rlimits probed per OS, wall-clock kill | `backend/engine/runner.py` |
 | Reliability | Exactly-once journal, idempotent steps, dry run, cancel, rollback. Preflight check before any effect | `backend/engine/`, scenario battery 31/31 |
@@ -160,7 +175,7 @@ The sheets are deliberately messy: blank rows, rows with no ID, mixed date forma
 | 5% of steps interrupted (11–25 min pause) | 980 | 1,000 | **1.00** | **1.00** | 0 |
 | 15% of steps interrupted | 988 | 1,015 | **0.97** | **0.999** | 30 |
 
-Before stitching was added, the 15% scenario scored precision 0.56 and recall 0.93, because interrupted routines split into fragments that looked like patterns. The benchmark found that weakness, and stitching fixed it. Speed: about 3–4 ms per 1,000 events. This measures the implementation against its rule under messy timing; accuracy on a specific office's data will depend on how that office works.
+**Ablation:** on the same 500 workspaces with stitching switched off, the 15% scenario scores precision **0.81** and recall **0.93** with **212** false alarms, because interrupted routines split into fragments that look like patterns. With stitching: **0.97 / 0.999** and 30 false alarms. At 5% interrupted it is 0.996 / 0.996 without stitching and 1.00 / 1.00 with it. (Re-run 30 Sep 2026.) Speed: about 3–4 ms per 1,000 events. This measures the implementation against its rule under messy timing; accuracy on a specific office's data will depend on how that office works.
 
 ## 6. Impact and viability
 
@@ -170,7 +185,20 @@ Before stitching was added, the 15% scenario scored precision 0.56 and recall 0.
 > **Ahmed Sameh, CMO, Fortis**, on research with 130+ UAE SMEs ([MENAFN, April 2026](https://menafn.com/1111035482/Despite-the-AED-543B-digital-push-64-of-UAE-SMEs-run-core-operations-on-Excel))
 
 - **64% of UAE SMEs run core operations on Excel**, more than use accounting systems (51%) or POS systems (34%) (Fortis, April 2026). AutoStack is built for exactly this: it learns each office's own spreadsheet routine instead of replacing it with a new tool.
-- **First-hand case: TÜV Rheinland factory audits.** A member of Team Activation automated factory-audit report preparation for TÜV Rheinland work: reading a factory's document folder and master list, matching documents to the audit checklist and filling the report template. Each run matched **47 checklist items across 19 audit sections and placed 12 photos** automatically, work normally done by hand for every factory. It took about 8,300 lines of custom code, written by a developer. AutoStack exists so the next office doesn't need a developer to get the same result.
+**First-hand evidence: TÜV Rheinland, Dubai.** A member of Team Activation hand-built 8 automations for TÜV Rheinland's certification teams, and TÜV staff use them today:
+
+| Tool (hand-built, in use) | By hand | With the tool |
+|---|---|---|
+| Kuwait certificates: reads invoice PDFs and fills the certificate in TÜV's SAP portal | 1–2 hours for 2–3 people per 20 invoices | **20 invoices in 5 minutes** |
+| SABER shipment certificates | 2–3 hours per certificate (TÜV estimate from the task breakdown) | **5–7 minutes**; about **48 hours a month** freed at 20 certificates a month |
+| Factory-audit reports | Matching each factory's document list to the audit checklist by hand | 47 checklist items across 19 sections matched and 12 photos placed per run (~8,300 lines of code) |
+
+Each of these needed a developer for weeks. AutoStack exists so the next office doesn't.
+
+> "I would use it. It feels like it would save us a lot of time."
+> **Technical Officer (Conformity Assessment Engineer), TÜV Rheinland Middle East**, after seeing AutoStack (one of 5 office and factory workers who gave early feedback, September 2026)
+
+**AutoStack on a TÜV-style task (timed).** From 3 example edits on an invoice-review sheet with invented data, AutoStack identified the routine, planned the rule, wrote and self-checked the code, tested it on a copy of the sheet, dry-ran it and ran it live on the 5 remaining invoices in **0.4 seconds of processing** (offline generator; a Gemini call adds a few seconds; the person's edits and approval click are not counted). This is a simpler routine than the SAP-portal tool above, which AutoStack cannot build yet because it writes CSV; it shows the loop, not a like-for-like replacement.
 
 **Who it's for:** offices of 2 to 50 people whose work already lives in spreadsheets, such as trading companies, clinics, facility services, logistics and accounting firms.
 
@@ -199,7 +227,7 @@ Before stitching was added, the 15% scenario scored precision 0.56 and recall 0.
 | Week 1 | Install locally, point AutoStack at the team's shared folder, let it observe |
 | Weeks 2–4 | First patterns appear; the team approves the ones it trusts |
 | Month 2+ | Approved automations run on schedule; templates are shared between branches through the signed registry |
-| Next | Pilot with 3 UAE small offices (Dec to Feb) to replace illustrative savings with measured hours |
+| Next | Pilot with 3 UAE small offices, starting with the TÜV Rheinland teams already using our hand-built tools (Dec to Feb), to replace illustrative savings with measured hours |
 
 ---
 
@@ -214,16 +242,16 @@ Before stitching was added, the 15% scenario scored precision 0.56 and recall 0.
 | Test & self-repair | Static checks + hardened sandbox + automatic repair loop (3 attempts); failing code can never be activated |
 | Dry run | Preview from the Workflows page; preflight on every run with hand-back to a person |
 | Go live | Manual, schedule, file-change and webhook triggers; exactly-once, rollback, verifiable audit chain |
-| Around the loop | Signed registry, 4-role access control, privacy ledger, retention windows, SIEM export, sample workspace |
+| Around the loop | Signed registry, 4-role access control, privacy ledger, retention windows, SIEM export, sample workspace, Try it live practice workspace |
 
 ### Next (clearly scoped)
 
 | Item | Current state | Next step |
 |---|---|---|
-| Generated runtimes for any sheet shape | Detection works on any sheet; generated runtimes currently cover follow-up and status-update workflows | Generalise the runtime to any detected schema (by 14 Nov) |
+| Runtimes for any sheet | Automations run on any CSV in the watched folder, learning the rule and the columns to set from your own edits; Excel files are detected but written back only as CSV | Write back to `.xlsx`; rules with more than one condition (by 14 Nov) |
 | Counting the latest occurrence | The most recent occurrence per record counts once it completes, so a pattern is suggested one repeat later | Deliberate, to avoid suggesting half-finished work |
 | Browser capture | Prototype extension; folder watching is the supported path | Harden the extension |
-| Cloud demo | Frontend and backend deploy to Railway (Dockerfiles and `railway.json` included, container build smoke-tested) | Folder capture in the cloud watches the server's volume; for your own files, run the worker locally |
+| Cloud demo | Live on Railway: [activation-frontend-production.up.railway.app](https://activation-frontend-production.up.railway.app/) (Dockerfiles and `railway.json` included) | Folder capture in the cloud watches the server's volume; for your own files, run the worker locally |
 | PII detection | Pattern and field-name based | Add name detection for free text |
 | Measured impact | Savings are illustrative | Pilots with 3 UAE small offices |
 
@@ -296,7 +324,7 @@ The first registered user becomes owner; later users join as operators.
 ## 10. Testing
 
 ```bash
-.venv/bin/python -m pytest tests/ -q                # 197 passed, 2 skipped, 29 subtests
+.venv/bin/python -m pytest tests/ -q                # 203 passed, 2 skipped, 29 subtests
 .venv/bin/python scripts/benchmark_detection.py     # precision / recall on 500 synthetic workspaces
 # with the worker running:
 .venv/bin/python scripts/qa_probe.py                # 54 end-to-end checks
@@ -307,7 +335,7 @@ cd frontend && npm run build
 
 | Suite | Covers | Last result |
 |---|---|---|
-| pytest | Lifecycle, detection quality and stitching, self-repairing generation, generic capture, XLSX, sample replay, RBAC, sandbox, triggers, registry signing and revocation, preflight, dry run, PII, privacy, retention | 197 pass / 2 skip |
+| pytest | Lifecycle, detection quality and stitching, self-repairing generation, generic capture, XLSX, sample replay, RBAC, sandbox, triggers, registry signing and revocation, preflight, dry run, PII, privacy, retention, practice workspace end to end | 203 pass / 2 skip |
 | benchmark_detection | 500 synthetic workspaces × 3 timing scenarios | P/R 1.00 clean |
 | qa_probe | Full live stack end to end | 54 / 54 |
 | scenario_battery | Concurrency, failure paths, webhook, schedule, RBAC edges | 31 / 31 |
@@ -353,7 +381,7 @@ Both services deploy from this repo. The container builds were smoke-tested loca
 **Backend service**
 - Root directory: repo root. Uses `railway.json` → `deploy/Dockerfile.worker` (starts the API and the trigger loop).
 - Add a volume mounted at `/data` (database, audit chain, signing key survive redeploys).
-- Variables: `ALLOWED_ORIGINS=https://<frontend>.up.railway.app`, `RAILWAY_RUN_UID=0`, optionally `AUTOSTACK_TOKEN`, `AUTOSTACK_AI_PROVIDER`, `AUTOSTACK_GEMINI_KEY`.
+- Variables: `ALLOWED_ORIGINS=https://<frontend>.up.railway.app`, `RAILWAY_RUN_UID=0`, optionally `AUTOSTACK_TOKEN`, `AUTOSTACK_AI_PROVIDER`, `AUTOSTACK_GEMINI_KEY`, `AUTOSTACK_GEMINI_MODEL` (default `gemini-2.5-flash`).
 
 **Frontend service**
 - Root directory: `frontend`. Uses `frontend/railway.json` → `frontend/Dockerfile` (Vite build served by nginx on `$PORT`).

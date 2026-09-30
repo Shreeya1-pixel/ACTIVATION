@@ -80,7 +80,19 @@ GEN_PROMPT = (
     "Generate a single Python function `def run(rows, ctx):` that processes tracking "
     "rows according to the rules. Return ONLY the function. No imports beyond "
     "csv/io/datetime/re/json, no file/network/os access, no eval/exec. The function "
-    "returns a list of row results."
+    "returns a list of row results.\n\n"
+    "Contract:\n"
+    "- `rows` is a list of dicts mapping column name to string value.\n"
+    "- `ctx['eligibility_status']` is a string or None; `ctx['eligibility_date']` is an "
+    "ISO date string or None.\n"
+    "- Column names come from CONTEXT: `client_id_field`, `eligibility.status_field` "
+    "(default 'Status'), `eligibility.date_field` (may be absent), and `action`.\n"
+    "- Keep a row only if eligibility_status is None or row[status_field] equals it, AND "
+    "(when date_field is given and eligibility_date is not None) row[date_field] is present "
+    "and str(row[date_field]) <= eligibility_date.\n"
+    "- For each kept row, in input order, append {client_id_field: row.get(client_id_field), "
+    "'effect': action}.\n"
+    "- Use only builtins. Wrap the function in a ```python code block."
 )
 
 
