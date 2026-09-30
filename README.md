@@ -56,6 +56,9 @@ A member of Team Activation hand-built 8 automations that TÜV Rheinland staff i
 
 > "I would use it. It feels like it would save us a lot of time."
 > **Technical Officer (Conformity Assessment Engineer), TÜV Rheinland Middle East**, after seeing AutoStack (one of 5 office and factory workers who gave early feedback, September 2026)
+>
+> "We use Excel for a lot of our work, so this would save us time."
+> **Resident Engineer, ACE International Consulting Engineers, Dubai**
 
 Savings maths, viability and the adoption path: [docs/impact.md](docs/impact.md).
 

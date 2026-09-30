@@ -18,6 +18,9 @@ Each of these needed a developer for weeks. AutoStack exists so the next office 
 
 > "I would use it. It feels like it would save us a lot of time."
 > **Technical Officer (Conformity Assessment Engineer), TÜV Rheinland Middle East**, after seeing AutoStack (one of 5 office and factory workers who gave early feedback, September 2026)
+>
+> "We use Excel for a lot of our work, so this would save us time."
+> **Resident Engineer, ACE International Consulting Engineers, Dubai**
 
 **AutoStack on a TÜV-style task (timed).** From 3 example edits on an invoice-review sheet with invented data, AutoStack identified the routine, planned the rule, wrote and self-checked the code, tested it on a copy of the sheet, dry-ran it and ran it live on the 5 remaining invoices in **0.4 seconds of processing** (offline generator, simple routine; a Gemini call adds a few seconds; the person's edits and approval click are not counted). This is a simpler routine than the internal-portal tools above, which AutoStack cannot build yet because it writes CSV; it shows the loop, not a like-for-like replacement.
 
